@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"github.com/pedro-phd/first-api-go/src/configuration/rest_err"
+	"github.com/pedro-phd/first-api-go/src/configuration/validation"
 	"github.com/pedro-phd/first-api-go/src/controller/model/request"
 )
 
@@ -16,7 +16,7 @@ func CreateUser(c *gin.Context) {
 	// if validation of fields it is ok (binding in request struct)
 
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
-		restErr := rest_err.NewBadRequestError(fmt.Sprintf("some fields are incorrect, error: %s", err.Error()))
+		restErr := validation.ValidateUserError(err)
 		c.JSON(restErr.Code, restErr)
 		return
 	}
