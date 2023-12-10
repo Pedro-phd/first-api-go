@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/pedro-phd/first-api-go/src/configuration/logger"
 	"github.com/pedro-phd/first-api-go/src/controller/routes"
 )
 
@@ -18,7 +19,7 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	fmt.Printf(" 🚀 System online in %s ambient", os.Getenv("AMBIENT"))
+	logger.Info(fmt.Sprintf("🚀 System online in %s ambient", os.Getenv("AMBIENT")))
 
 	router := gin.Default()
 	routes.InitRoutes(&router.RouterGroup)
