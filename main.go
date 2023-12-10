@@ -5,7 +5,9 @@ import (
 	"log"
 	"os"
 
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/pedro-phd/first-api-go/src/controller/routes"
 )
 
 func main() {
@@ -17,4 +19,11 @@ func main() {
 	}
 
 	fmt.Printf(" 🚀 System online in %s ambient", os.Getenv("AMBIENT"))
+
+	router := gin.Default()
+	routes.InitRoutes(&router.RouterGroup)
+
+	if err := router.Run(":3333"); err != nil {
+		log.Fatal(err)
+	}
 }
