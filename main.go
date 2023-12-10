@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/pedro-phd/first-api-go/src/configuration/database/mongodb"
 	"github.com/pedro-phd/first-api-go/src/configuration/logger"
 	"github.com/pedro-phd/first-api-go/src/controller"
 	"github.com/pedro-phd/first-api-go/src/controller/routes"
@@ -30,6 +31,8 @@ func main() {
 
 	router := gin.Default()
 	routes.InitRoutes(&router.RouterGroup, userController)
+
+	mongodb.InitConnection()
 
 	if err := router.Run(":3333"); err != nil {
 		log.Fatal(err)
